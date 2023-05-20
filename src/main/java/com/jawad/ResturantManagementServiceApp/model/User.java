@@ -1,0 +1,39 @@
+package com.jawad.ResturantManagementServiceApp.model;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "users")
+public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @NotEmpty
+    private String name;
+    @Email
+    @Column(unique = true)
+    private String email;
+    private String password;
+    @NotEmpty
+    private String address;
+    private LocalDateTime createdTime;
+
+    public User(String name, String email, String password, String address){
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.address = address;
+        this.createdTime = LocalDateTime.now();
+    }
+}
